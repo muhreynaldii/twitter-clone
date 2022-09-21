@@ -4,13 +4,16 @@
     <div class="container mx-auto px-10">
       <tweet-form @tweets="addTweet" />
       <h2 class="mt-2 text-lg font-medium text-white">Feeds</h2>
-      <tweet-card
-        @comment="handleComment"
-        v-for="(feed, index) in this.tweets"
-        :feed="feed"
-        :index="index"
-        @delete="handleDelete"
-      />
+      <div class="flex flex-col-reverse">
+        <tweet-card
+          @comment="handleComment"
+          v-for="(feed, index) in this.tweets"
+          :feed="feed"
+          :index="index"
+          @delete="handleDelete"
+          @deleteComment="handleDeleteComment"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +23,7 @@ import Navbar from "./components/Navbar.vue";
 import image from "./assets/user1.png";
 import user2 from "./assets/user2.png";
 import user3 from "./assets/user3.png";
+import user4 from "./assets/user4.jpg";
 
 export default {
   components: { Navbar },
@@ -42,6 +46,7 @@ export default {
           retweet: 4,
           reply: "false",
           heart: "false",
+          isLarge: true,
           comments: [
             {
               id: 1,
@@ -67,6 +72,7 @@ export default {
           retweet: 8,
           reply: "false",
           heart: "false",
+          isLarge: true,
           comments: [
             {
               id: 1,
@@ -77,6 +83,17 @@ export default {
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
               like: 23,
               retweet: 8,
+              heart: "false",
+            },
+            {
+              id: 2,
+              fullname: "Ujang Maman",
+              username: "@ujangmaman",
+              avatar_url: user4,
+              tweet:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+              like: 100,
+              retweet: 40,
               heart: "false",
             },
           ],
@@ -91,8 +108,8 @@ export default {
   },
   methods: {
     addTweet(tweet) {
-      this.tweets.unshift({
-        id: this.maxId + 1,
+      this.tweets.push({
+        id: this.tweets[this.tweets.length - 1].id + 1,
         fullname: this.user.fullname,
         username: this.user.username,
         avatar_url: this.user.avatar_url,
@@ -100,13 +117,17 @@ export default {
         like: 0,
         retweet: 0,
         reply: "false",
-        heart: "false",
         delete: true,
+        heart: "false",
+        isLarge: true,
         comments: [],
       });
     },
     handleDelete(index) {
       this.tweets.splice(index, 1);
+    },
+    handleDeleteComment(number, index) {
+      this.tweets[number].comments.splice(index, 1);
     },
     handleComment(tweet, number) {
       this.tweets[number].comments.push({
@@ -120,11 +141,6 @@ export default {
         delete: true,
         heart: "false",
       });
-    },
-    computed: {
-      maxId() {
-        return Math.max(...this.tweets.map((tweet) => tweet.id), 0);
-      },
     },
   },
 };

@@ -1,7 +1,11 @@
 <template>
   <div class="mt-2 flex w-full flex-row rounded-md bg-gray-700 p-2">
     <div class="w-[5%]">
-      <Avatar :avatar_url="feed.avatar_url" class="h-12 w-12" />
+      <Avatar
+        :avatar_url="feed.avatar_url"
+        :isLarge="feed.isLarge"
+        class="h-12 w-12"
+      />
     </div>
     <div class="w-[95%] pl-2">
       <h3 class="text-white">
@@ -80,24 +84,25 @@
       >
         Reply
       </button>
-      <KeepAlive>
-        <div v-if="hasChildren">
-          <tweet-form
-            :btnCancel="true"
-            @closeForm="closeForm"
-            v-if="!feed.reply"
-            @tweets="handleComment"
-            :number="index"
-          />
-        </div>
-      </KeepAlive>
-      <div>
+      <div class="flex flex-col-reverse">
         <tweet-card
           v-for="(comment, index) in feed.comments"
           :feed="comment"
           :key="comment.id"
           :index="index"
+          @delete="deleteComment(this.index, index)"
         />
+      </div>
+      <div v-if="hasChildren">
+        <KeepAlive>
+          <tweet-form
+            :btnCancel="true"
+            @closeForm="closeForm"
+            v-if="!feed.reply"
+            @tweets="handleComment"
+            :number="this.index"
+          />
+        </KeepAlive>
       </div>
     </div>
   </div>
@@ -107,12 +112,12 @@
 import Avatar from "./Avatar.vue";
 
 export default {
-  emits: ["delete", "comment"],
+  emits: ["delete", "comment", "deleteComment"],
   props: { feed: Object, index: Number },
   computed: {
     hasChildren() {
       const { comments } = this.feed;
-      return comments && comments.length > 0;
+      return comments && comments.length >= 0;
     },
   },
   components: {
@@ -122,8 +127,10 @@ export default {
     deleteData(index) {
       this.$emit("delete", index);
     },
+    deleteComment(number, index) {
+      this.$emit("deleteComment", number, index);
+    },
     onShowReply() {
-      console.log(this.feed.reply);
       this.feed.reply = !this.feed.reply;
     },
     funcRetweet() {

@@ -1,26 +1,28 @@
 <template>
-  <nav class="w-full h-[50px] bg-green-700 sticky">
+  <nav class="sticky top-0 h-[50px] w-full bg-green-700">
     <div
-      class="w-full flex justify-between container px-10 items-center mx-auto"
+      class="container mx-auto flex w-full items-center justify-between px-10"
     >
       <div>
-        <h1 class="font-bold text-lg text-white">
+        <h1 class="text-lg font-bold text-white">
           Simple Twitter Clone With Vue
         </h1>
       </div>
       <div class="flex">
-        <div>
+        <div class="px-2">
           <p class="text-white">{{ provideUser.fullname }}</p>
-          <p class="text-green-400">{{ provideUser.username }}</p>
+          <p class="pr-2 text-green-400">{{ provideUser.username }}</p>
         </div>
-        <img :src="provideUser.avatar_url" alt="" class="pl-2" />
+        <Avatar :avatar_url="provideUser.avatar_url" class="h-12 w-12" />
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import Avatar from "./Avatar.vue";
 export default {
+  components: { Avatar },
   inject: ["provideUser"],
 };
 </script>

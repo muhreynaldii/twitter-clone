@@ -28,7 +28,7 @@
       <button
         class="mt-2 mb-2 w-full cursor-pointer rounded-lg border border-white/70 bg-rush/50 px-2 text-start text-white"
         @click="onShowReply"
-        v-if="feed.reply"
+        v-show="feed.reply"
       >
         Reply
       </button>
@@ -42,16 +42,15 @@
           class="rounded-xl bg-cadnium/30"
         />
         <div v-if="hasChildren">
-          <KeepAlive>
-            <tweet-form
-              :btnCancel="true"
-              @closeForm="closeForm"
-              v-if="!feed.reply"
-              @tweets="handleComment"
-              :number="this.index"
-              @blur="handleBlur"
-            />
-          </KeepAlive>
+          <tweet-form
+            :btnCancel="true"
+            @closeForm="closeForm"
+            v-show="!feed.reply"
+            @tweets="handleComment"
+            :number="this.index"
+            @blur="handleBlur"
+            class="pb-4"
+          />
         </div>
       </div>
     </div>
@@ -85,11 +84,11 @@ export default {
     onShowReply() {
       this.feed.reply = !this.feed.reply;
     },
-    funcRetweet() {
-      this.feed.retweet++;
-    },
     closeForm() {
       this.onShowReply();
+    },
+    funcRetweet() {
+      this.feed.retweet++;
     },
     toggleLike() {
       this.feed.heart = !this.feed.heart;

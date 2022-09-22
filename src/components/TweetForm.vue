@@ -13,6 +13,7 @@
         ref="focusMe"
         @blur="blurEventHandler()"
         placeholder="What's happening?"
+        autofocus
       />
 
       <div class="flex justify-between">
@@ -40,6 +41,8 @@
 </template>
 
 <script>
+import { nextTick } from "vue";
+
 export default {
   data() {
     return {
@@ -47,8 +50,10 @@ export default {
     };
   },
   emits: ["tweets", "closeForm", "blur", "focus"],
-  mounted() {
-    this.focusOnTextarea();
+  updated() {
+    nextTick(() => {
+      this.focusOnTextarea();
+    });
   },
   methods: {
     pushData() {

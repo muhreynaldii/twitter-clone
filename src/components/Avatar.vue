@@ -3,14 +3,14 @@
     <img
       :src="avatar_url"
       alt="avatar_image"
-      class="h-12 w-12 rounded-full border border-white bg-cover p-[3px]"
+      class="h-9 w-9 rounded-full border border-white bg-cover p-[3px] lg:h-12 lg:w-12"
     />
   </div>
   <div v-else>
     <img
       :src="avatar_url"
       alt="avatar_image"
-      class="h-10 w-10 rounded-full border border-white bg-cover p-[3px]"
+      class="h-7 w-7 rounded-full border border-white bg-cover p-[3px] lg:h-10 lg:w-10"
     />
   </div>
 </template>

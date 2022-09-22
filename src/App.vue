@@ -1,9 +1,9 @@
 <template>
-  <div class="h-[2000px] w-full bg-gray-800">
+  <div class="h-full w-full bg-melsun pb-4">
     <Navbar />
     <div class="container mx-auto px-10">
       <tweet-form @tweets="addTweet" />
-      <h2 class="mt-2 text-lg font-medium text-white">Feeds</h2>
+      <h2 class="mt-2 text-lg font-medium text-botnight">Feeds</h2>
       <div class="flex flex-col-reverse">
         <tweet-card
           @comment="handleComment"
@@ -20,7 +20,7 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import image from "./assets/user1.png";
+import user1 from "./assets/user1.jpg";
 import user2 from "./assets/user2.png";
 import user3 from "./assets/user3.png";
 import user4 from "./assets/user4.jpg";
@@ -32,7 +32,7 @@ export default {
       user: {
         fullname: "Muhammad Reynaldi",
         username: "@muhreynaldii",
-        avatar_url: image,
+        avatar_url: user1,
       },
       tweets: [
         {
@@ -41,11 +41,11 @@ export default {
           username: "@mollyhudson",
           avatar_url: user2,
           tweet:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+            "Ullam nulla tortor, porta a mi vehicula, egestas commodo tellus. Vivamus viverra arcu eu diam ultrices egestas",
           like: 10,
           retweet: 4,
-          reply: "false",
-          heart: "false",
+          reply: true,
+          heart: false,
           isLarge: true,
           comments: [
             {
@@ -54,10 +54,10 @@ export default {
               username: "@mollyhudson",
               avatar_url: user2,
               tweet:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-              like: 10,
-              retweet: 4,
-              heart: "false",
+                "Aliquam in arcu eu dolor egestas sollicitudin. Curabitur ornare eget eros ut sollicitudin",
+              like: 72,
+              retweet: 12,
+              heart: false,
             },
           ],
         },
@@ -67,11 +67,11 @@ export default {
           username: "@alex",
           avatar_url: user3,
           tweet:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-          like: 23,
-          retweet: 8,
-          reply: "false",
-          heart: "false",
+            "Suspendisse et lorem finibus, eleifend mauris eget, luctus neque. Nulla non lectus sed orci congue semper at sed leo.",
+          like: 13,
+          retweet: 2,
+          reply: true,
+          heart: false,
           isLarge: true,
           comments: [
             {
@@ -80,10 +80,10 @@ export default {
               username: "@alex",
               avatar_url: user3,
               tweet:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+                "Quisque pellentesque, nisl eget tristique pharetra, neque turpis molestie mauris, vel vulputate enim turpis in massa.",
               like: 23,
               retweet: 8,
-              heart: "false",
+              heart: false,
             },
             {
               id: 2,
@@ -91,10 +91,10 @@ export default {
               username: "@ujangmaman",
               avatar_url: user4,
               tweet:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+                "In auctor consectetur lectus et imperdiet. Ut consequat dolor in efficitur pulvinar. ",
               like: 100,
               retweet: 40,
-              heart: "false",
+              heart: false,
             },
           ],
         },
@@ -116,9 +116,9 @@ export default {
         tweet: tweet,
         like: 0,
         retweet: 0,
-        reply: "false",
+        reply: true,
         delete: true,
-        heart: "false",
+        heart: false,
         isLarge: true,
         comments: [],
       });
@@ -139,7 +139,7 @@ export default {
         like: 0,
         retweet: 0,
         delete: true,
-        heart: "false",
+        heart: false,
       });
     },
   },

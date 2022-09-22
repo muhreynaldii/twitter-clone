@@ -3,15 +3,18 @@
     <form
       @submit.prevent="pushData()"
       ref="form"
-      class="w-full rounded-md border border-gray-100 p-4"
+      class="w-full rounded-md border border-gray-100 bg-botnight p-4"
     >
       <textarea
         name="tweet"
         id=""
-        class="h-[100px] w-full rounded-md bg-gray-700 p-4 text-white"
+        class="h-[100px] w-full rounded-md bg-cadnium/30 p-4 text-white"
         v-model="myInput"
         ref="focusMe"
+        @blur="blurEventHandler()"
+        placeholder="What's happening?"
       />
+
       <div class="flex justify-between">
         <div>
           <p class="text-white" ref="form">{{ this.myInput.length }}/10</p>
@@ -43,20 +46,22 @@ export default {
       myInput: "",
     };
   },
-  emits: ["tweets", "closeForm"],
-  computed: {
-    length() {
-      return this.myInput.length;
-    },
-  },
+  emits: ["tweets", "closeForm", "blur", "focus"],
   mounted() {
-    this.$refs.focusMe.focus();
+    this.focusOnTextarea();
   },
   methods: {
     pushData() {
       this.$emit("tweets", this.myInput, this.number);
       this.$refs.form.reset();
       return (this.myInput = "");
+    },
+    blurEventHandler() {
+      this.$emit("blur", this.myInput);
+    },
+    focusOnTextarea() {
+      const focusMeRef = this.$refs.focusMe;
+      focusMeRef.focus();
     },
   },
   props: {

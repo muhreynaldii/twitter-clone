@@ -10,7 +10,14 @@ module.exports = {
         xl: "1080px",
       },
     },
-    extend: {},
+    extend: {
+      colors: {
+        botnight: "#12403C",
+        melsun: "#F2D09D",
+        cadnium: "#EF8428",
+        rush: "#461708",
+      },
+    },
   },
   plugins: [],
 };

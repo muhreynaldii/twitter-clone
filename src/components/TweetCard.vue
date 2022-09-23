@@ -28,7 +28,7 @@
       <button
         class="mt-2 mb-2 w-full cursor-pointer rounded-lg border border-white/70 bg-rush/50 px-2 text-start text-white"
         @click="onShowReply"
-        v-show="feed.reply"
+        v-show="feed.reply === true"
       >
         Reply
       </button>
@@ -45,7 +45,7 @@
           <tweet-form
             :btnCancel="true"
             @closeForm="handleCloseForm"
-            v-show="!feed.reply"
+            v-show="feed.reply === false"
             @tweets="handleComment"
             :indexComment="this.indexTweet"
             @blur="handleBlur"
@@ -81,6 +81,10 @@ export default {
     deleteComment(indexComment, index) {
       this.$emit("deleteComment", indexComment, index);
     },
+    handleComment(tweet, indexComment) {
+      this.$emit("comment", tweet, indexComment);
+      this.onShowReply();
+    },
     onShowReply() {
       this.feed.reply = !this.feed.reply;
     },
@@ -97,10 +101,6 @@ export default {
       } else {
         this.feed.like--;
       }
-    },
-    handleComment(tweet, indexComment) {
-      this.$emit("comment", tweet, indexComment);
-      this.onShowReply();
     },
     handleBlur(myInput) {
       if (myInput.length == 0) {

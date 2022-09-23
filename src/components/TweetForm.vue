@@ -7,7 +7,7 @@
     >
       <textarea
         name="tweet"
-        id=""
+        id="tweet"
         class="h-[100px] w-full rounded-md bg-cadnium/30 p-4 text-white"
         v-model="myInput"
         ref="focusMe"

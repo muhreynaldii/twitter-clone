@@ -13,7 +13,6 @@
         ref="focusMe"
         @blur="blurEventHandler()"
         placeholder="What's happening?"
-        autofocus
       />
 
       <div class="flex justify-between">
@@ -50,6 +49,9 @@ export default {
     };
   },
   emits: ["tweets", "blur", "closeForm"],
+  mounted() {
+    this.focusOnTextarea();
+  },
   updated() {
     nextTick(() => {
       this.focusOnTextarea();

@@ -9,7 +9,7 @@
           @comment="handleComment"
           v-for="(feed, index) in this.tweets"
           :feed="feed"
-          :index="index"
+          :indexTweet="index"
           @delete="handleDelete"
           @deleteComment="handleDeleteComment"
         />
@@ -123,15 +123,15 @@ export default {
         comments: [],
       });
     },
-    handleDelete(index) {
-      this.tweets.splice(index, 1);
+    handleDelete(indexTweet) {
+      this.tweets.splice(indexTweet, 1);
     },
-    handleDeleteComment(number, index) {
-      this.tweets[number].comments.splice(index, 1);
+    handleDeleteComment(indexComment, index) {
+      this.tweets[indexComment].comments.splice(index, 1);
     },
-    handleComment(tweet, number) {
-      this.tweets[number].comments.push({
-        id: this.tweets[number].comments.length + 1,
+    handleComment(tweet, indexComment) {
+      this.tweets[indexComment].comments.push({
+        id: this.tweets[indexComment].comments.length + 1,
         fullname: this.user.fullname,
         username: this.user.username,
         avatar_url: this.user.avatar_url,

@@ -20,7 +20,7 @@
         :retweet="feed.retweet"
         :heart="feed.heart"
         :delete="feed.delete"
-        :index="index"
+        :index="indexTweet"
         :funcRetweet="funcRetweet"
         :deleteData="deleteData"
         :toggleLike="toggleLike"
@@ -37,8 +37,8 @@
           v-for="(comment, index) in feed.comments"
           :feed="comment"
           :key="comment.id"
-          :index="index"
-          @delete="deleteComment(this.index, index)"
+          :indexTweet="index"
+          @delete="deleteComment(this.indexTweet, index)"
           class="rounded-xl bg-cadnium/30"
         />
         <div v-if="hasChildren">
@@ -47,7 +47,7 @@
             @closeForm="handleCloseForm"
             v-show="!feed.reply"
             @tweets="handleComment"
-            :number="this.index"
+            :indexComment="this.indexTweet"
             @blur="handleBlur"
             class="pb-4"
           />
@@ -63,7 +63,7 @@ import Icons from "./Icons.vue";
 
 export default {
   emits: ["delete", "comment", "deleteComment"],
-  props: { feed: Object, index: Number },
+  props: { feed: Object, indexTweet: Number },
   computed: {
     hasChildren() {
       const { comments } = this.feed;
@@ -75,11 +75,11 @@ export default {
     Icons,
   },
   methods: {
-    deleteData(index) {
-      this.$emit("delete", index);
+    deleteData(indexTweet) {
+      this.$emit("delete", indexTweet);
     },
-    deleteComment(number, index) {
-      this.$emit("deleteComment", number, index);
+    deleteComment(indexComment, index) {
+      this.$emit("deleteComment", indexComment, index);
     },
     onShowReply() {
       this.feed.reply = !this.feed.reply;
@@ -98,8 +98,8 @@ export default {
         this.feed.like--;
       }
     },
-    handleComment(tweet, number) {
-      this.$emit("comment", tweet, number);
+    handleComment(tweet, indexComment) {
+      this.$emit("comment", tweet, indexComment);
       this.onShowReply();
     },
     handleBlur(myInput) {

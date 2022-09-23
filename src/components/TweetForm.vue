@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     pushData() {
-      this.$emit("tweets", this.myInput, this.number);
+      this.$emit("tweets", this.myInput, this.indexComment);
       this.$refs.form.reset();
       return (this.myInput = "");
     },
@@ -77,7 +77,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    number: {
+    indexComment: {
       type: Number,
     },
   },

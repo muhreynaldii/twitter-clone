@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import OffLike from "./Offlike.vue";
+import OffLike from "./OffLike.vue";
 import OnLike from "./OnLike.vue";
 
 export default {

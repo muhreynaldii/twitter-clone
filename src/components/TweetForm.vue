@@ -24,7 +24,7 @@
           <button
             class="mr-2 rounded-md bg-red-500 px-4 py-2 text-white"
             v-if="btnCancel"
-            @click.prevent="$emit('closeForm')"
+            @click.prevent="closeForm()"
           >
             Cancel
           </button>
@@ -49,7 +49,7 @@ export default {
       myInput: "",
     };
   },
-  emits: ["tweets", "closeForm", "blur", "focus"],
+  emits: ["tweets", "blur", "closeForm"],
   updated() {
     nextTick(() => {
       this.focusOnTextarea();
@@ -63,6 +63,9 @@ export default {
     },
     blurEventHandler() {
       this.$emit("blur", this.myInput);
+    },
+    closeForm() {
+      this.$emit("closeForm");
     },
     focusOnTextarea() {
       const focusMeRef = this.$refs.focusMe;

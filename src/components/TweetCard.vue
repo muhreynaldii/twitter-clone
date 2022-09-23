@@ -44,7 +44,7 @@
         <div v-if="hasChildren">
           <tweet-form
             :btnCancel="true"
-            @closeForm="closeForm"
+            @closeForm="handleCloseForm"
             v-show="!feed.reply"
             @tweets="handleComment"
             :number="this.index"
@@ -84,7 +84,7 @@ export default {
     onShowReply() {
       this.feed.reply = !this.feed.reply;
     },
-    closeForm() {
+    handleCloseForm() {
       this.onShowReply();
     },
     funcRetweet() {

@@ -14,6 +14,17 @@
           @deleteComment="handleDeleteComment"
         />
       </div>
+      <h2 class="mt-2 text-lg font-medium text-botnight">Feeds With Api</h2>
+      <div>
+        <tweet-card
+          @comment="handleComment"
+          v-for="(feed, index) in this.dataHasil"
+          :feed="feed"
+          :indexTweet="index"
+          @delete="handleDelete"
+          @deleteComment="handleDeleteComment"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -27,8 +38,14 @@ import user4 from "./assets/user4.jpg";
 
 export default {
   components: { Navbar },
+  created() {
+    fetch("https://6331004fcff0e7bf70e4980f.mockapi.io/api/v1/tweets")
+      .then((response) => response.json())
+      .then((data) => (this.dataHasil = data));
+  },
   data() {
     return {
+      dataHasil: [],
       user: {
         fullname: "Muhammad Reynaldi",
         username: "@muhreynaldii",

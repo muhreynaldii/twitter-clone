@@ -1,0 +1,4 @@
+GET https://6331004fcff0e7bf70e4980f.mockapi.io/api/v1/tweets
+
+###
+GET https://6331004fcff0e7bf70e4980f.mockapi.io/api/v1/tweets/1
